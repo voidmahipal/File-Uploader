@@ -1,11 +1,32 @@
 import express from "express";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import "dotenv/config";
+import session from "express-session";
+import "./config/passport.js";
+import passport from "passport";
+import indexRouter from "./routes/indexroutes.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
-app.get("/",(req,res)=>{
-    res.send("Hii");
-})
+app.set("views",path.join(__dirname,"views"));
+app.set("view engine","ejs");
+
+app.use(express.urlencoded({extended:true}));
+
+app.use(
+    session({
+        secret:process.env.SESSION_SECRET,
+        resave:false,
+        saveUninitialized:false
+    })
+);
+app.use(passport.session());
+
+app.use("/",indexRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT,(err)=>{
