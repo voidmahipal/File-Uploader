@@ -19,5 +19,13 @@ async function createUser(req,res) {
     await addUserInDB(username,hashedPassword);
     res.redirect("/log-in");
 }
+function logUserOut(req,res) {
+    req.logout((err)=>{
+        if(err) {
+            return next(err);
+        }
+        res.redirect("/");
+    });
+};
 
-export {getIndexContent,getLoginForm,getSignupForm,createUser};
+export {getIndexContent,getLoginForm,getSignupForm,createUser,logUserOut};

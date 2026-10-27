@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getIndexContent,getLoginForm,getSignupForm,createUser } from "../controllers/indexcontroller.js";
+import { getIndexContent,getLoginForm,getSignupForm,createUser,logUserOut } from "../controllers/indexcontroller.js";
 import passport from "passport";
 
 const indexRouter = Router();
@@ -14,5 +14,7 @@ indexRouter.post("/log-in",passport.authenticate("local",{
     failureRedirect:"/log-in",
     failureMessage:true,
 }));
+
+indexRouter.post("/log-out",logUserOut);
 
 export default indexRouter;
