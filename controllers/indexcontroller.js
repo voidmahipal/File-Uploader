@@ -27,5 +27,11 @@ function logUserOut(req,res) {
         res.redirect("/");
     });
 };
+function getAddNewFileForm(req,res) {
+    res.render("addnewfileform");
+}
+function addFile(req,res) {
+    res.redirect("/");
+}
 
-export {getIndexContent,getLoginForm,getSignupForm,createUser,logUserOut};
+export {getIndexContent,getLoginForm,getSignupForm,createUser,logUserOut,getAddNewFileForm,addFile};

@@ -14,6 +14,7 @@
         <a href="/sign-up">Sign-up</a>
     <% }else { %>
         <h2>You are logged in.</h2>
+        <button onclick="window.location.href='/upload'">Add Files</button>
         <form action="/log-out" method="post">
             <button type="submit">Log-out</button>
         </form>
