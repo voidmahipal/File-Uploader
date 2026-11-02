@@ -13,8 +13,14 @@
         <span>Don't have an account?</span>
         <a href="/sign-up">Sign-up</a>
     <% }else { %>
-        <h2>You are logged in.</h2>
+        <% for(let i=0;i<files.length;i++) { %>
+            <a href="/file/<%=files[i].id%>"><%=files[i].originalname%></a>
+        <% } %>
+        <% for(let i=0;i<folders.length;i++) { %>
+            <a href="/folder/<%=folders[i].id%>"><%=folders[i].name%></a>    
+        <% } %>
         <button onclick="window.location.href='/upload'">Add Files</button>
+        <button onclick="window.location.href='/<%= user.id %>/folder'">Create new Folder</button>
         <form action="/log-out" method="post">
             <button type="submit">Log-out</button>
         </form>

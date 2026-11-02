@@ -8,6 +8,41 @@ async function addUserInDB(username,password) {
         }
     });
 };
+async function addFileInDB(originalname,path,mimetype,size,userId) {
+    await prisma.files.create({
+        data:{
+            originalname : originalname,
+            filepath : path,
+            mimetype : mimetype,
+            size : size,
+            userid : userId,
+        }
+    });
+}
+async function addFolderInDB(userId,name) {
+    await prisma.folders.create({
+        data:{
+            name : name,
+            userid : userId 
+        }
+    });
+}
+async function getFilesById(userId) {
+    const files = await prisma.files.findMany({
+        where:{
+            userid:userId
+        }
+    });
+    return files;
+}
+async function getFoldersById(userId) {
+    const folders = await prisma.folders.findMany({
+        where:{
+            userid:userId
+        }
+    });
+    return folders;
+}
 async function getUserById(id) {
     const user = await prisma.users.findUnique({
         where:{
@@ -25,4 +60,4 @@ async function getUserByUsername(username) {
     return user;
 }
 
-export {addUserInDB,getUserById,getUserByUsername};
+export {addUserInDB,getUserById,getUserByUsername,addFileInDB,addFolderInDB,getFilesById,getFoldersById};
