@@ -6,6 +6,9 @@ import session from "express-session";
 import "./config/passport.js";
 import passport from "passport";
 import indexRouter from "./routes/indexroutes.js";
+import loginRouter from "./routes/loginroute.js";
+import logOutRouter from "./routes/logoutroute.js";
+import signupRouter from "./routes/signuproute.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { prisma } from "./lib/prisma.js";
 
@@ -40,6 +43,9 @@ app.use(
 app.use(passport.session());
 
 app.use("/",indexRouter);
+app.use("/log-in",loginRouter);
+app.use("/log-out",logOutRouter);
+app.use("/sign-up",signupRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT,(err)=>{
