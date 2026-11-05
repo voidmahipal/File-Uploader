@@ -59,5 +59,13 @@ async function getUserByUsername(username) {
     })
     return user;
 }
+async function getFileInfoFromdb(id) {
+    const file = await prisma.files.findUnique({
+        where:{
+            id:id
+        }
+    });
+    return file;
+}
 
-export {addUserInDB,getUserById,getUserByUsername,addFileInDB,addFolderInDB,getFilesById,getFoldersById};
+export {addUserInDB,getUserById,getUserByUsername,addFileInDB,addFolderInDB,getFilesById,getFoldersById,getFileInfoFromdb};

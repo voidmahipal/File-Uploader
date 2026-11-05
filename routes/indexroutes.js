@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getIndexContent,getAddNewFileForm,addFile,getAddNewFolderForm,addFolder } from "../controllers/indexcontroller.js";
+import { getIndexContent,getAddNewFileForm,addFile,getAddNewFolderForm,addFolder,getFileInfoById } from "../controllers/indexcontroller.js";
 import { upload } from "../config/multer.js";
 
 const indexRouter = Router({mergeParams:true});
@@ -11,5 +11,7 @@ indexRouter.post("/upload",upload.single("file"),addFile);
 
 indexRouter.get("/:userId/folder",getAddNewFolderForm);
 indexRouter.post("/:userId/folder",addFolder);
+
+indexRouter.get("/file/:fileId",getFileInfoById);
 
 export default indexRouter;

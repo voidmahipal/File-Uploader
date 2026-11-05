@@ -1,4 +1,5 @@
-import { addFolderInDB,addFileInDB,getFilesById,getFoldersById } from "../db/queries.js";
+import { addFolderInDB,addFileInDB,getFilesById,getFoldersById,getFileInfoFromdb } from "../db/queries.js";
+import path from "node:path";
 
 async function getIndexContent(req,res) {
     if(req.user) {
@@ -28,5 +29,10 @@ async function addFolder(req,res) {
     await addFolderInDB(Number(userId),name);
     res.redirect("/");
 }
-
-export {getIndexContent,getAddNewFileForm,addFile,getAddNewFolderForm,addFolder};
+async function getFileInfoById(req,res) {
+    const {fileId} = req.params;
+    const file = await getFileInfoFromdb(Number(fileId));
+    res.type(file.mimetype);
+    res.sendFile(path.resolve(file.filepath));
+}
+export {getIndexContent,getAddNewFileForm,addFile,getAddNewFolderForm,addFolder,getFileInfoById};
