@@ -1,4 +1,4 @@
-import { addFolderInDB,addFileInDB,getFilesById,getFoldersById,getFileInfoFromdb } from "../db/queries.js";
+import { addFolderInDB,addFileInDB,getFilesById,getFoldersById,getFileInfoFromdb,getFileInFolderFromdb } from "../db/queries.js";
 import path from "node:path";
 
 async function getIndexContent(req,res) {
@@ -34,5 +34,10 @@ async function getFileInfoById(req,res) {
     const file = await getFileInfoFromdb(Number(fileId));
     res.type(file.mimetype);
     res.sendFile(path.resolve(file.filepath));
+}
+async function getFilesInFolder(req,res) {
+    const {folderId} = req.params;
+    const files = await getFileInFolderFromdb(Number(folderId));
+    res.render("folder",{files:files,folderId:folderId});
 }
 export {getIndexContent,getAddNewFileForm,addFile,getAddNewFolderForm,addFolder,getFileInfoById};

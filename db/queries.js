@@ -67,5 +67,12 @@ async function getFileInfoFromdb(id) {
     });
     return file;
 }
-
-export {addUserInDB,getUserById,getUserByUsername,addFileInDB,addFolderInDB,getFilesById,getFoldersById,getFileInfoFromdb};
+async function getFileInFolderFromdb(id) {
+    const files = await prisma.files.findMany({
+        where:{
+            folderid:id
+        }
+    });
+    return files;
+}
+export {addUserInDB,getUserById,getUserByUsername,addFileInDB,addFolderInDB,getFilesById,getFoldersById,getFileInfoFromdb,getFileInFolderFromdb};

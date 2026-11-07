@@ -13,5 +13,6 @@ indexRouter.get("/:userId/folder",getAddNewFolderForm);
 indexRouter.post("/:userId/folder",addFolder);
 
 indexRouter.get("/file/:fileId",getFileInfoById);
+indexRouter.get("/folder/:folderId",);
 
 export default indexRouter;

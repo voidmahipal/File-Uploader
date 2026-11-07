@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folder</title>
+</head>
+<body>
+    <% for(let i=0;i<files.length;i++) { %>
+            <a href="/file/<%=files[i].id%>"><%=files[i].originalname%></a>
+    <%  }  %>
+    <button onclick='' ></button>
+    <form action="/upload/folderId.folderId" method="post">
+        <button type="submit">Add New file</button>
+    </form>
+</body>
+</html>
