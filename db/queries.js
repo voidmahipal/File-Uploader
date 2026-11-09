@@ -30,7 +30,8 @@ async function addFolderInDB(userId,name) {
 async function getFilesById(userId) {
     const files = await prisma.files.findMany({
         where:{
-            userid:userId
+            userid:userId,
+            folderid:null
         }
     });
     return files;
@@ -75,4 +76,16 @@ async function getFileInFolderFromdb(id) {
     });
     return files;
 }
-export {addUserInDB,getUserById,getUserByUsername,addFileInDB,addFolderInDB,getFilesById,getFoldersById,getFileInfoFromdb,getFileInFolderFromdb};
+async function addFileInFolderIndb(originalname,path,mimetype,size,userId,folderId) {
+    await prisma.files.create({
+        data:{
+            originalname : originalname,
+            filepath : path,
+            mimetype : mimetype,
+            size : size,
+            userid : userId,
+            folderid : folderId
+        }
+    });
+}
+export {addUserInDB,getUserById,getUserByUsername,addFileInDB,addFolderInDB,getFilesById,getFoldersById,getFileInfoFromdb,getFileInFolderFromdb,addFileInFolderIndb};
