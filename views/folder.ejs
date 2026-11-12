@@ -9,6 +9,7 @@
     <button onclick="window.location.href='/'" ><--</button>
     <% for(let i=0;i<files.length;i++) { %>
             <a href="/file/<%=files[i].id%>"><%=files[i].originalname%></a>
+            <a href="/detail/<%=files[i].id%>">Details</a>
     <%  }  %>
     <button onclick=" window.location.href='/upload/<%= folderId %>' " >Add New File</button>
 </body>

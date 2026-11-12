@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+</head>
+<body>
+    <h2>Name : <%=originalname%></h2>
+    <div>
+        <span>Size : </span>
+        <% if(size>=1000000) { %>
+            <span><%= size/1000000 %> MB</span>
+        <%} else { %>
+            <span><%= size/1000 %> KB</span>
+        <% } %>
+    </div>
+    <a href="/download/<%=fileId%>">Download</a>
+</body>
+</html>

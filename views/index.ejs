@@ -15,6 +15,7 @@
     <% }else { %>
         <% for(let i=0;i<files.length;i++) { %>
             <a href="/file/<%=files[i].id%>"><%=files[i].originalname%></a>
+            <a href="/detail/<%=files[i].id%>">Details</a>
         <% } %>
         <% for(let i=0;i<folders.length;i++) { %>
             <a href="/folder/<%=folders[i].id%>"><%=folders[i].name%></a>    

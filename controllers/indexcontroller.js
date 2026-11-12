@@ -1,4 +1,4 @@
-import { addFolderInDB,addFileInDB,getFilesById,getFoldersById,getFileInfoFromdb,getFileInFolderFromdb,addFileInFolderIndb } from "../db/queries.js";
+import { addFolderInDB,addFileInDB,getFilesById,getFoldersById,getFileInfoFromdb,getFileInFolderFromdb,addFileInFolderIndb,getFileDetailsFromDB } from "../db/queries.js";
 import path from "node:path";
 
 async function getIndexContent(req,res) {
@@ -51,4 +51,15 @@ async function addFileInFolder(req,res) {
     await addFileInFolderIndb(originalname,path,mimetype,size,id,Number(folderId)); 
     res.redirect(`/folder/${folderId}`);
 }
-export {getIndexContent,getAddNewFileForm,addFile,getAddNewFolderForm,addFolder,getFileInfoById,getFilesInFolder,getAddNewFileFormInFolder,addFileInFolder};
+async function getFileDetails(req,res) {
+    const {fileId} = req.params;
+    const {originalname,size} = await getFileDetailsFromDB(Number(fileId));
+    res.render("details",{originalname,size,fileId});
+}
+async function sendFileToDownload(req,res) {
+    const {fileId} = req.params;
+    const file = await getFileInfoFromdb(Number(fileId));
+    res.download(path.resolve(file.filepath),file.originalname);
+}
+
+export {getIndexContent,getAddNewFileForm,addFile,getAddNewFolderForm,addFolder,getFileInfoById,getFilesInFolder,getAddNewFileFormInFolder,addFileInFolder,getFileDetails,sendFileToDownload};

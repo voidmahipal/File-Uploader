@@ -88,4 +88,12 @@ async function addFileInFolderIndb(originalname,path,mimetype,size,userId,folder
         }
     });
 }
-export {addUserInDB,getUserById,getUserByUsername,addFileInDB,addFolderInDB,getFilesById,getFoldersById,getFileInfoFromdb,getFileInFolderFromdb,addFileInFolderIndb};
+async function getFileDetailsFromDB(fileId) {
+    const info = await prisma.files.findUnique({
+        where:{
+            id:fileId
+        }
+    });
+    return info;
+}
+export {addUserInDB,getUserById,getUserByUsername,addFileInDB,addFolderInDB,getFilesById,getFoldersById,getFileInfoFromdb,getFileInFolderFromdb,addFileInFolderIndb,getFileDetailsFromDB};
